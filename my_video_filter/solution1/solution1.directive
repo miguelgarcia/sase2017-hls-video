@@ -1,0 +1,52 @@
+<AutoPilot:ProjectResources xmlns:AutoPilot="com.autoesl.autopilot.ui.directiveView">
+    <sourceFile name="">
+        <directive functionName="my_video_filter" label="" functionLabel="">
+            <pragma name="INTERFACE">
+                <option name="axis" value="" positionalBoolean="mode"/>
+                <option name="port" value="src" positionalBoolean="4"/>
+            </pragma>
+        </directive>
+        <directive functionName="my_video_filter" label="" functionLabel="">
+            <pragma name="INTERFACE">
+                <option name="axis" value="" positionalBoolean="mode"/>
+                <option name="port" value="dest" positionalBoolean="4"/>
+            </pragma>
+        </directive>
+        <directive functionName="my_video_filter" label="" functionLabel="">
+            <pragma name="INTERFACE">
+                <option name="s_axilite" value="" positionalBoolean="mode"/>
+                <option name="port" value="width" positionalBoolean="4"/>
+            </pragma>
+        </directive>
+        <directive functionName="my_video_filter" label="" functionLabel="">
+            <pragma name="INTERFACE">
+                <option name="s_axilite" value="" positionalBoolean="mode"/>
+                <option name="port" value="height" positionalBoolean="4"/>
+            </pragma>
+        </directive>
+        <directive functionName="my_video_filter" label="" functionLabel="">
+            <pragma name="INTERFACE">
+                <option name="s_axilite" value="" positionalBoolean="mode"/>
+                <option name="port" value="return" positionalBoolean="4"/>
+            </pragma>
+        </directive>
+        <directive functionName="my_video_filter" label="for_col" functionLabel="">
+            <pragma name="PIPELINE"/>
+        </directive>
+        <directive functionName="my_video_filter" label="for_row" functionLabel="">
+            <pragma name="LOOP_TRIPCOUNT">
+                <option name="min" value="1080"/>
+                <option name="max" value="1080"/>
+                <option name="avg" value="1080"/>
+            </pragma>
+        </directive>
+        <directive functionName="my_video_filter" label="for_col" functionLabel="">
+            <pragma name="LOOP_TRIPCOUNT">
+                <option name="min" value="1920"/>
+                <option name="max" value="1920"/>
+                <option name="avg" value="1920"/>
+            </pragma>
+        </directive>
+    </sourceFile>
+</AutoPilot:ProjectResources>
+
