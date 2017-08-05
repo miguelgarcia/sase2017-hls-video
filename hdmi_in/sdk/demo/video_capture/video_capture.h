@@ -84,7 +84,7 @@
 /*
  * This driver currently supports 3 frames.
  */
-#define VIDEO_NUM_FRAMES 3
+#define VIDEO_NUM_FRAMES 4
 
 /*
  * These constants define the pins that the HPD and pixel clock

@@ -272,7 +272,7 @@ int VideoInitialize(VideoCapture *videoPtr, INTC *intCtrl, XAxiVdma *vdma, u16 g
 	 * Initialize the VDMA Read configuration struct
 	 */
 	videoPtr->vdmaConfig.FrameDelay = 0;
-	videoPtr->vdmaConfig.EnableCircularBuf = 1;
+	videoPtr->vdmaConfig.EnableCircularBuf = 0;
 	videoPtr->vdmaConfig.EnableSync = 0;
 	videoPtr->vdmaConfig.PointNum = 0;
 	videoPtr->vdmaConfig.EnableFrameCounter = 0;
