@@ -40,6 +40,7 @@
 #include "xil_cache.h"
 #include "timer_ps/timer_ps.h"
 #include "xparameters.h"
+#include "xscutimer.h"
 
 #include "xaxidma.h"
 #include "xmy_video_filter.h"
@@ -78,6 +79,8 @@ char fRefresh; //flag used to trigger a refresh of the Menu on video detect
 u8 frameBuf[DISPLAY_NUM_FRAMES][DEMO_MAX_FRAME];
 u8 *pFrames[DISPLAY_NUM_FRAMES]; //array of pointers to the frame buffers
 
+XScuTimer my_timer;
+
 /*
  * Interrupt vector table
  */
@@ -106,6 +109,7 @@ void DemoInitialize()
 {
 	int Status;
 	XAxiVdma_Config *vdmaConfig;
+	XScuTimer_Config *Timer_Config;
 	XAxiDma_Config *dmaConfig;
 	int i;
 
@@ -159,6 +163,8 @@ void DemoInitialize()
 	 * Initialize a timer used for a simple delay
 	 */
 	TimerInitialize(SCU_TIMER_ID);
+	Timer_Config = XScuTimer_LookupConfig(XPAR_PS7_SCUTIMER_0_DEVICE_ID);
+	XScuTimer_CfgInitialize(&my_timer, Timer_Config, Timer_Config->BaseAddr);
 
 	/*
 	 * Initialize VDMA driver
@@ -290,7 +296,15 @@ void DemoFilter()
 		}
 		// esperar fin de cuadro
 		while(XAxiVdma_CurrFrameStore(&vdma, XAXIVDMA_WRITE) == inFrame);
+
+		XScuTimer_LoadTimer(&my_timer, 0xFFFFFFFF);
+		XScuTimer_Start(&my_timer);
+
 		DemoFilterFrame(pFrames[inFrame], pFrames[outFrame], videoCapt.timing.HActiveVideo, videoCapt.timing.VActiveVideo, DEMO_STRIDE);
+
+		int t = 0xFFFFFFFF - XScuTimer_GetCounterValue(&my_timer);
+		xil_printf("Fin de filtrado en %d ticks\n\r", t);
+
 		DisplayChangeFrame(&dispCtrl, outFrame);
 		while(XAxiVdma_CurrFrameStore(&vdma, XAXIVDMA_READ) != outFrame);
 		inFrame = nextInFrame;
